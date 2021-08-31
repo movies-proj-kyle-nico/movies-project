@@ -3,14 +3,14 @@
 // Glitch API Link: https://groovy-busy-close.glitch.me/movies
 
 $(document).ready(function () {
+
     const serverURL = 'https://groovy-busy-close.glitch.me/movies';
 
-    // window.addEventListener('DOMContentLoaded', () => {
-    //     alert("Loading...");
-    // });
+    $.holdReady( true );
 
     //jQuery function to 'GET'
     function data (serverURL, data) {
+        $('#renderCards').html(`<h1>Loading...</h1>`);
         const options = {
             method: 'GET',
             headers: {
@@ -18,11 +18,13 @@ $(document).ready(function () {
             },
             body: JSON.stringify(data)
         };
+        $.holdReady( false );
         return fetch(serverURL, options)
             .then(data => data.json())
             // .then(data => data)
             .catch(console.error);
     }
+
 
     // GET all movies?
     // data(serverURL)
@@ -62,10 +64,38 @@ $(document).ready(function () {
                     </div>`
             })
         }).then(() => {
-                $("#renderCards").append(html)
+                $("#renderCards").replaceWith(html)
             });
     }
 
     renderData();
+
+    // edit movies?
+    function editMovie () {
+        data(serverURL).then(function (data) {
+
+        })
+    }
+
+    // add movie?
+    // function addMovie () {
+    //     let newMovie = {};
+    //     newMovie.title =
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
