@@ -32,21 +32,19 @@ $(document).ready(function () {
         data(serverURL).then(function (data) {
             console.log(data)
             data.forEach((movie, index) => {
-                html += `<div class="row row-cols-1 row-cols-md-2">
-                      <div class="col mb-4">
-                        <div class="card">
-                          <img src="img/stock-image.jpeg" class="card-img-top movie-image" alt="stock-image">
-                          <div class="card-body">
-                            <h5 class="card-title">${movie.title}</h5>
-                            <p class="card-text">*ENTER DESCRIPTION HERE*</p>
-                            <span>Rating: ${movie.rating}</span>
-                            <br>
-                            <button class="edit-btn" data-id="${movie.id}">Edit Me!</button>
-                            <button class="delete-btn" data-id="${movie.id}">Delete Me!</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>`
+                html += `<div class="col mb-4">
+                               <div class="card mx-2">
+                                <img src="img/stock-image.jpeg" class="card-img-top movie-image" alt="stock-image">
+                                <div class="card-body">
+                                    <h5 class="card-title">${movie.title}</h5>
+                                    <p class="card-text">*ENTER DESCRIPTION HERE*</p>
+                                    <h5><span>Rating: ${movie.rating}</span></h5>
+                                    <br>
+                                    <button class="edit-btn" data-id="${movie.id}">Edit Me!</button>
+                                    <button class="delete-btn" data-id="${movie.id}">Delete Me!</button>
+                                 </div>
+                             </div>
+                        </div>`
             })
         }).then(() => {
                 $("#renderCards").replaceWith(html)
