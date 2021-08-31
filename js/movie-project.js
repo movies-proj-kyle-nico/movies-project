@@ -55,7 +55,7 @@ $(document).ready(function () {
 
     renderData();
 
-    // add movie?---------------------------------
+    // Add movies?---------------------------------
 
     $("#add-movie-btn").click(function (e) {
         e.preventDefault();
@@ -75,27 +75,37 @@ $(document).ready(function () {
             .catch(console.error);
     });
 
-    // edit movies?--------------------------------
+    // Edit movies?--------------------------------
 
-    // $("#edit-movie-btn").click(function (e) {
-    //     e.preventDefault();
-    //         let editAddition = {
-    //             id: $('#edit-movie-rating'),
-    //             title: $("#edit-movie-title-movie-title").val(),
-    //             rating: $("#edit-movie-rating-movie-rating").val()
-    //         }
-    //
-    //         fetch(`${serverURL}/${movie.id}`, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(editAddition)
-    //         }).then(renderData)
-    //             .catch(console.error)
+    function editMovie (ID) {
+        fetch(`${serverURL}/${ID}`,
+            {method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                // body: JSON.stringify({
+                //     title: $(this).title.value,
+                //     rating: $(this).rating.value
+                // })
+            })
+            .then(data => console.log('Edit Movie', data));
+    }
+
+    $(document).on('click', '.edit-btn', function (e) {
+        e.preventDefault();
+        let selectedBttn = $(this).attr('data-id');
+        console.log(selectedBttn);
+        editMovie(selectedBttn);
+    });
+
+    // data.forEach( movie => {
+    //    $("#movie-dropdown").html(`<option data-dropdown="${movie.id}">${movie.title}</option>`)
     // });
 
-    // Delete a Movie?
+    // $("#edit-movie-title").val($(this).data.title)
+
+    // Delete Movies?
+
     function deleteMovie (ID) {
         fetch(`${serverURL}/${ID}`,
             {method: "DELETE"})
@@ -105,9 +115,8 @@ $(document).ready(function () {
     $(document).on('click', '.delete-btn', function (e) {
         e.preventDefault();
         let selectedBttn = $(this).attr('data-id');
-        console.log(selectedBttn)
-        console.log(this)
         deleteMovie(selectedBttn);
+        // setTimeout(renderData, 1500);
     });
 
 
