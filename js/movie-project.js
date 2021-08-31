@@ -79,16 +79,20 @@ $(document).ready(function () {
 
     function editMovie (ID) {
         fetch(`${serverURL}/${ID}`,
-            {method: "PUT"})
+            {method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                // body: JSON.stringify({
+                //     title: $(this).title.value,
+                //     rating: $(this).rating.value
+                // })
+            })
             .then(data => console.log('Edit Movie', data));
     }
 
     $(document).on('click', '.edit-btn', function (e) {
         e.preventDefault();
-        let currentValue = {
-            title: $(this).title.value,
-            rating: $(this).rating.value
-        };
         let selectedBttn = $(this).attr('data-id');
         console.log(selectedBttn);
         editMovie(selectedBttn);
