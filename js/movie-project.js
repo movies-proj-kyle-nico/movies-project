@@ -25,24 +25,6 @@ $(document).ready(function () {
             .catch(console.error);
     }
 
-
-    // GET all movies?
-    // data(serverURL)
-    //     .then(data => console.log(data));
-
-    // GET single movie?
-    function getMovie (ID) {
-        data(`${serverURL}/${ID}`)
-            .then(data => console.log('This specific movie', data));
-    }
-
-    // Delete a Movie?
-    function deleteMovie (ID) {
-        fetch(serverURL + "/" + ID, {method: "DELETE"})
-            .then(data => console.log('Delete Movie', data));
-    }
-
-
     // make cards?
     function renderData() {
         // $('#renderCards').html("")
@@ -70,32 +52,57 @@ $(document).ready(function () {
 
     renderData();
 
+    // add movie?
+
+    $("#add-movie-btn").click(function (e) {
+        e.preventDefault();
+        let newAddition = {
+            title: $("#added-movie-title").val(),
+            rating: $("#added-movie-rating").val()
+        }
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newAddition)
+        };
+    return fetch(serverURL, options)
+            .then(renderData)
+            .catch(console.error);
+    });
+
     // edit movies?
+
     function editMovie () {
         data(serverURL).then(function (data) {
 
         })
     }
 
-    // add movie?
-    // function addMovie () {
-    //     let newMovie = {};
-    //     newMovie.title =
+    $("#edit-movie-btn").click(function (e) {
+        e.preventDefault();
+    });
+
+    // Delete a Movie?
+    function deleteMovie (ID) {
+        fetch(serverURL + "/" + ID, {method: "DELETE"})
+            .then(data => console.log('Delete Movie', data));
+    }
+
+    $("#delete-movie-btn").click(function (e) {
+        e.preventDefault();
+    });
+
+
+    // GET all movies?
+    // data(serverURL)
+    //     .then(data => console.log(data));
+
+    // GET single movie?
+    // function getMovie (ID) {
+    //     data(`${serverURL}/${ID}`)
+    //         .then(data => console.log('This specific movie', data));
     // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
