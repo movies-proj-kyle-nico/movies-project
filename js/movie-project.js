@@ -31,7 +31,7 @@ $(document).ready(function () {
         let html = "";
         data(serverURL).then(function (data) {
             console.log(data)
-            data.forEach(movie => {
+            data.forEach((movie, index) => {
                 html += `<div class="row row-cols-1 row-cols-md-2">
                       <div class="col mb-4">
                         <div class="card">
@@ -40,6 +40,9 @@ $(document).ready(function () {
                             <h5 class="card-title">${movie.title}</h5>
                             <p class="card-text">*ENTER DESCRIPTION HERE*</p>
                             <span>Rating: ${movie.rating}</span>
+                            <br>
+                            <button class="edit-btn">Edit Me!</button>
+                            <button class="delete-btn">Delete Me!</button>
                           </div>
                         </div>
                       </div>
@@ -93,13 +96,26 @@ $(document).ready(function () {
     // });
 
     // Delete a Movie?
-    function deleteMovie (ID) {
-        fetch(serverURL + "/" + ID, {method: "DELETE"})
-            .then(data => console.log('Delete Movie', data));
-    }
+    // function deleteMovie (ID) {
+    //     fetch(serverURL + "/" + ID, {method: "DELETE"})
+    //         .then(data => console.log('Delete Movie', data));
+    // }
 
-    $("#delete-movie-btn").click(function (e) {
+    $(".delete-btn").click(function (e) {
         e.preventDefault();
+        data.forEach( movie => {
+            fetch(`${serverURL}/${movie.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(() => {
+                    console.log(`Success: deleted dog with id of ${movie.id}`);
+                })
+                .catch(console.error);
+        });
     });
 
 
