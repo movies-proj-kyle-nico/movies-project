@@ -27,11 +27,10 @@ $(document).ready(function () {
 
     // make cards?
     function renderData() {
-        // $('#renderCards').html("")
         let html = "";
         data(serverURL).then(function (data) {
             console.log(data)
-            data.forEach((movie, index) => {
+            data.forEach((movie) => {
                 html += `<div class="col mb-4">
                                <div class="card mx-2">
                                 <img src="img/stock-image.jpeg" class="card-img-top movie-image" alt="stock-image">
@@ -40,8 +39,8 @@ $(document).ready(function () {
                                     <p class="card-text">*ENTER DESCRIPTION HERE*</p>
                                     <h5><span>Rating: ${movie.rating}</span></h5>
                                     <br>
-                                    <button class="edit-btn" data-id="${movie.id}">Edit Me!</button>
-                                    <button class="delete-btn" data-id="${movie.id}">Delete Me!</button>
+<!--                                    <button class="edit-btn" data-id="${movie.id}">Edit Me!</button>-->
+                                    <button class="delete-btn btn btn-secondary my-1" data-id="${movie.id}">Delete Me!</button>
                                  </div>
                              </div>
                         </div>`
