@@ -41,8 +41,8 @@ $(document).ready(function () {
                             <p class="card-text">*ENTER DESCRIPTION HERE*</p>
                             <span>Rating: ${movie.rating}</span>
                             <br>
-                            <button class="edit-btn">Edit Me!</button>
-                            <button class="delete-btn">Delete Me!</button>
+                            <button class="edit-btn" data-id="${movie.id}">Edit Me!</button>
+                            <button class="delete-btn" data-id="${movie.id}">Delete Me!</button>
                           </div>
                         </div>
                       </div>
@@ -96,26 +96,18 @@ $(document).ready(function () {
     // });
 
     // Delete a Movie?
-    // function deleteMovie (ID) {
-    //     fetch(serverURL + "/" + ID, {method: "DELETE"})
-    //         .then(data => console.log('Delete Movie', data));
-    // }
+    function deleteMovie (ID) {
+        fetch(`${serverURL}/${ID}`,
+            {method: "DELETE"})
+            .then(data => console.log('Delete Movie', data));
+    }
 
-    $(".delete-btn").click(function (e) {
+    $(document).on('click', '.delete-btn', function (e) {
         e.preventDefault();
-        data.forEach( movie => {
-            fetch(`${serverURL}/${movie.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(res => res.json())
-                .then(() => {
-                    console.log(`Success: deleted dog with id of ${movie.id}`);
-                })
-                .catch(console.error);
-        });
+        let selectedBttn = $(this).attr('data-id');
+        console.log(selectedBttn)
+        console.log(this)
+        deleteMovie(selectedBttn);
     });
 
 
