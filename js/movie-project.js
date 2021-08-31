@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     renderData();
 
-    // add movie?
+    // add movie?---------------------------------
 
     $("#add-movie-btn").click(function (e) {
         e.preventDefault();
@@ -72,17 +72,25 @@ $(document).ready(function () {
             .catch(console.error);
     });
 
-    // edit movies?
+    // edit movies?--------------------------------
 
-    function editMovie () {
-        data(serverURL).then(function (data) {
-
-        })
-    }
-
-    $("#edit-movie-btn").click(function (e) {
-        e.preventDefault();
-    });
+    // $("#edit-movie-btn").click(function (e) {
+    //     e.preventDefault();
+    //         let editAddition = {
+    //             id: $('#edit-movie-rating'),
+    //             title: $("#edit-movie-title-movie-title").val(),
+    //             rating: $("#edit-movie-rating-movie-rating").val()
+    //         }
+    //
+    //         fetch(`${serverURL}/${movie.id}`, {
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(editAddition)
+    //         }).then(renderData)
+    //             .catch(console.error)
+    // });
 
     // Delete a Movie?
     function deleteMovie (ID) {
