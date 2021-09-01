@@ -54,8 +54,7 @@ $(document).ready(function () {
 
     // add movie?---------------------------------
 
-    $("#add-movie-btn").click(function (e) {
-        e.preventDefault();
+    function addBttn () {
         let newAddition = {
             title: $("#added-movie-title").val(),
             rating: $("#added-movie-rating").val()
@@ -67,9 +66,14 @@ $(document).ready(function () {
             },
             body: JSON.stringify(newAddition)
         };
-    return fetch(serverURL, options)
+        return fetch(serverURL, options)
             .then(renderData)
             .catch(console.error);
+    }
+
+    $("#add-movie-btn").click(function (e) {
+        e.preventDefault();
+        addBttn();
     });
 
     // edit movies?--------------------------------
