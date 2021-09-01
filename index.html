@@ -10,7 +10,7 @@
 
 <!-----------    create navbar to search movies---->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Movie Application</a>
+        <a class="navbar-brand" href="#">KyleNickFlicks</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,11 +30,11 @@
     <!--    form to add movies-->
     <div class="row d-flex justify-content-around">
         <form class="form-inline">
-            <label class="sr-only">Name</label>
-            <input type="text" class="form-control my-1 mr-sm-2" id="added-movie-title" placeholder="Enter Title Here...">
+            <label class="sr-only" for="added-movie-title">Movie Title</label>
+            <input type="text" id="added-movie-title" class="form-control my-1 mr-sm-2"  placeholder="Enter Title Here...">
 
-            <label class="my-1 mr-2">Choose Rating:</label>
-            <select class="custom-select my-1 mr-sm-2" id="added-movie-rating">
+            <label for="added-movie-rating" class="my-1 mr-2">Choose Rating:</label>
+            <select class="custom-select my-1 mr-sm-2" id="added-movie-rating" name="rating">
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -46,6 +46,21 @@
             <button type="submit" class="btn btn-primary my-1" id="add-movie-btn">Add New Movie</button>
         </form>
 
+        <form class="form-inline">
+            <div id="movie-to-edit" class="mx-3">
+                <select name="editableMovies" class="custom-select">
+                    <option value="">Movie Title</option>
+                </select>
+            </div>
+
+            <label for="edit-movie-rating" class="my-1 mr-2">Choose Rating:</label>
+            <select name="rating" class="custom-select my-1 mr-sm-2" id="edit-movie-rating">
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+                <option value="5">Five</option>
+              
 <!--        <form class="form-inline">-->
 <!--            <label class="sr-only">Name</label>-->
 <!--            <select class="custom-select my-1 mr-sm-2" id="movie-dropdown"></select>-->
@@ -64,18 +79,18 @@
 <!--            <button type="submit" class="btn btn-primary my-1" id="edit-movie-btn">Edit Movie</button>-->
 <!--        </form>-->
 
-<!--        <form class="form-inline">-->
-<!--            <label class="sr-only">Name</label>-->
-<!--            <input type="text" class="form-control my-1 mr-sm-2" id="" placeholder="Enter Title Here...">-->
 
-<!--            <button type="submit" class="btn btn-primary my-1" id="delete-movie-btn">Delete</button>-->
-<!--        </form>-->
+            </select>
+
+            <button type="submit" class="btn btn-primary my-1" id="edit-movie-btn">Edit Movie</button>
+        </form>
     </div>
 
 
 
 <!---------    rendered card data----------------->
-    <div id="renderCards">
+    <div  class="row row-cols-1 row-cols-md-3 my-2">
+            <div id="renderCards"></div>
     </div>
 
 
