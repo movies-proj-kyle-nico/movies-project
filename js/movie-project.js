@@ -2,7 +2,7 @@
 
 // Glitch API Link: https://groovy-busy-close.glitch.me/movies
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
     const serverURL = 'https://groovy-busy-close.glitch.me/movies';
 
@@ -45,9 +45,8 @@ $(document).ready(function () {
                              </div>
                         </div>`
             })
-        }).then(() => {
-                $("#renderCards").replaceWith(html)
-            });
+        }).then(() => {$("#renderCards").replaceWith(html)});
+        editMovies();
     }
 
     renderData();
@@ -78,25 +77,41 @@ $(document).ready(function () {
 
     // edit movies?--------------------------------
 
-    // $("#edit-movie-btn").click(function (e) {
-    //     e.preventDefault();
-    //         let editAddition = {
-    //             id: $('#edit-movie-rating'),
-    //             title: $("#edit-movie-title-movie-title").val(),
-    //             rating: $("#edit-movie-rating-movie-rating").val()
-    //         }
-    //
-    //         fetch(`${serverURL}/${movie.id}`, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(editAddition)
-    //         }).then(renderData)
-    //             .catch(console.error)
-    // });
+    function editMovies() {
 
-    // Delete a Movie?
+        data(serverURL).then( function (data) {
+            let formHTML = `<select id="edit-movie-rating" class="custom-select" name="edit-rating" disable selected value>`
+            data.forEach( function (movie) {
+                formHTML += `<option value="${movie.id}">${movie.title}</option>`
+            })
+            formHTML += `<option hidden disabled selected value> - Select Movie - </option>`
+            formHTML += `</select>`
+            $('#movie-to-edit').html(formHTML);
+        })
+
+    }
+
+
+    $("#edit-movie-btn").click(function (e) {
+        e.preventDefault();
+            let editAddition = {}
+            editAddition.id = editMovieID,
+            editAddition.title = $("#edit-movie-title-movie-title").val(),
+            editAddition.ratin = $("#edit-movie-rating-movie-rating").val()
+
+            fetch(`${serverURL}/${editMovieID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(editAddition)
+            }).then(renderData).then(editMovies)
+                .catch(console.error)
+    });
+
+    var editMovieID = 0;
+
+    // Delete a Movie?-----------------------------
     function deleteMovie (ID) {
         fetch(`${serverURL}/${ID}`,
             {method: "DELETE"})
@@ -106,10 +121,18 @@ $(document).ready(function () {
     $(document).on('click', '.delete-btn', function (e) {
         e.preventDefault();
         let selectedBttn = $(this).attr('data-id');
-        console.log(selectedBttn)
-        console.log(this)
         deleteMovie(selectedBttn);
+        console.log(selectedBttn)
+        // console.log(this)
+        setTimeout(renderData, 2000);
     });
+
+
+    //-----------------------------------------------
+
+    $(document).on('change', function () {
+        console.log(this.value)
+    })
 
 
     // GET all movies?
@@ -122,4 +145,4 @@ $(document).ready(function () {
     //         .then(data => console.log('This specific movie', data));
     // }
 
-});
+// });
