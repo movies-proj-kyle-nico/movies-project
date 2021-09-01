@@ -98,8 +98,10 @@
             let editAddition = {};
             editAddition.id = $("#edit-movie-title").find(":selected").data("movie-id");
             editAddition.title = $("#edit-movie-title").val();
-            // editAddition.year = $("#edit-movie-year").val();
+            editAddition.year = $("#edit-movie-year").val();
             editAddition.rating = $("#edit-movie-rating").val();
+            editAddition.image = $("#edit-movie-image").val();
+            editAddition.description = $("#edit-movie-description").val();
         fetch(`${serverURL}/${editAddition.id}`, {
                 method: 'PUT',
                 headers: {
