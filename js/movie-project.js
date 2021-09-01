@@ -95,10 +95,11 @@
 
     $("#edit-movie-btn").click(function (e) {
         e.preventDefault();
-            let editAddition = {}
-            editAddition.id = editMovieID,
-            editAddition.title = $("#edit-movie-title-movie-title").val(),
-            editAddition.ratin = $("#edit-movie-rating-movie-rating").val()
+            let editAddition = {};
+            var editMovieID = 1;
+            editAddition.id = editMovieID;
+            editAddition.title = $("#edit-movie-title-movie-title").val();
+            editAddition.rating = $("#edit-movie-rating-movie-rating").val();
 
             fetch(`${serverURL}/${editMovieID}`, {
                 method: 'PUT',
@@ -109,39 +110,6 @@
             }).then(renderData).then(editMovies)
                 .catch(console.error)
     });
-
-    var editMovieID = 0;
-
-    // Delete a Movie?-----------------------------
-=======
-    // Edit movies?--------------------------------
-
-    function editMovie (ID) {
-        fetch(`${serverURL}/${ID}`,
-            {method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                // body: JSON.stringify({
-                //     title: $(this).title.value,
-                //     rating: $(this).rating.value
-                // })
-            })
-            .then(data => console.log('Edit Movie', data));
-    }
-
-    $(document).on('click', '.edit-btn', function (e) {
-        e.preventDefault();
-        let selectedBttn = $(this).attr('data-id');
-        console.log(selectedBttn);
-        editMovie(selectedBttn);
-    });
-
-    // data.forEach( movie => {
-    //    $("#movie-dropdown").html(`<option data-dropdown="${movie.id}">${movie.title}</option>`)
-    // });
-
-    // $("#edit-movie-title").val($(this).data.title)
 
     // Delete Movies?
 
