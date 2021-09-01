@@ -132,6 +132,7 @@
 
     $(document).on('change', function () {
         console.log(this.value)
+        console.log($(this));
     })
 
 
