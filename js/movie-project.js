@@ -30,7 +30,7 @@
             console.log(data)
             data.forEach((movie) => {
                 html += `<div class="col mb-4">
-                               <div class="card mx-2 h-100">
+                               <div class="card bg-transparent mx-2 h-100">
                                 <img src="${movie.image}" class="card-img-top movie-image" alt="stock-image">
                                 <div class="card-body">
                                     <h4 class="card-title">${movie.title}</h4>
@@ -98,8 +98,10 @@
             let editAddition = {};
             editAddition.id = $("#edit-movie-title").find(":selected").data("movie-id");
             editAddition.title = $("#edit-movie-title").val();
-            // editAddition.year = $("#edit-movie-year").val();
+            editAddition.year = $("#edit-movie-year").val();
             editAddition.rating = $("#edit-movie-rating").val();
+            editAddition.image = $("#edit-movie-image").val();
+            editAddition.description = $("#edit-movie-description").val();
         fetch(`${serverURL}/${editAddition.id}`, {
                 method: 'PUT',
                 headers: {
