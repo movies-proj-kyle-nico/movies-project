@@ -30,11 +30,12 @@
             console.log(data)
             data.forEach((movie) => {
                 html += `<div class="col mb-4">
-                               <div class="card mx-2">
-                                <img src="img/stock-image.jpeg" class="card-img-top movie-image" alt="stock-image">
+                               <div class="card mx-2 h-100">
+                                <img src="${movie.image}" class="card-img-top movie-image" alt="stock-image">
                                 <div class="card-body">
-                                    <h5 class="card-title">${movie.title}</h5>
-                                    <p class="card-text">*ENTER DESCRIPTION HERE*</p>
+                                    <h4 class="card-title">${movie.title}</h4>
+                                    <h5>${movie.year}</h5>
+                                    <p class="card-text">${movie.description}</p>
                                     <h5><span>Rating: ${movie.rating}</span></h5>
                                     <br>
                                     <button class="delete-btn btn btn-secondary my-1" data-id="${movie.id}">Delete Me!</button>
@@ -53,7 +54,10 @@
     function addBttn () {
         let newAddition = {
             title: $("#added-movie-title").val(),
-            rating: $("#added-movie-rating").val()
+            year: $("#added-movie-year").val(),
+            rating: $("#added-movie-rating").val(),
+            image: $("#added-movie-image").val(),
+            description: $("#added-movie-description").val()
         }
         const options = {
             method: 'POST',
@@ -93,7 +97,8 @@
         e.preventDefault();
             let editAddition = {};
             editAddition.id = $("#edit-movie-title").find(":selected").data("movie-id");
-            editAddition.title = $("#edit-movie-title").val()
+            editAddition.title = $("#edit-movie-title").val();
+            // editAddition.year = $("#edit-movie-year").val();
             editAddition.rating = $("#edit-movie-rating").val();
         fetch(`${serverURL}/${editAddition.id}`, {
                 method: 'PUT',
@@ -105,7 +110,7 @@
                 .catch(console.error)
     });
 
-    // Delete Movies?
+    // Delete Movies?--------------------------------
 
     function deleteMovie (ID) {
         fetch(`${serverURL}/${ID}`,

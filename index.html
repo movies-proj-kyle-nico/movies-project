@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Movie App</title>
@@ -33,6 +33,9 @@
             <label class="sr-only" for="added-movie-title">Movie Title</label>
             <input type="text" id="added-movie-title" class="form-control my-1 mr-sm-2"  placeholder="Enter Title Here...">
 
+            <label class="sr-only" for="added-movie-year">Movie Year</label>
+            <input type="text" id="added-movie-year" class="form-control my-1 mr-sm-2" placeholder="Enter Year...">
+
             <label for="added-movie-rating" class="my-1 mr-2">Choose Rating:</label>
             <select class="custom-select my-1 mr-sm-2" id="added-movie-rating" name="rating">
                 <option value="1">One</option>
@@ -43,15 +46,24 @@
 
             </select>
 
+            <label class="sr-only" for="added-movie-image">Movie Image</label>
+            <input type="text" id="added-movie-image" class="form-control my-1 mr-sm-2"  placeholder="Enter Image URL...">
+
+            <label class="sr-only" for="added-movie-description">Movie Description</label>
+            <textarea type="text" id="added-movie-description" class="form-control my-1 mr-sm-2"  placeholder="Enter Description..."></textarea>
+
             <button type="submit" class="btn btn-primary my-1" id="add-movie-btn">Add New Movie</button>
         </form>
 
-        <form class="form-inline">
+        <form class="form-inline my-3">
             <div id="movie-to-edit" class="mx-3">
                 <select name="editableMovies" class="custom-select">
                     <option value="">Movie Title</option>
                 </select>
             </div>
+
+            <label for="edit-movie-year" class="my-1 mr-2"></label>
+            <input type="text" id="edit-movie-year" class="form-control my-1 mr-sm-2" placeholder="Edit Year...">
 
             <label for="edit-movie-rating" class="my-1 mr-2">Choose Rating:</label>
             <select name="rating" class="custom-select my-1 mr-sm-2" id="edit-movie-rating">
