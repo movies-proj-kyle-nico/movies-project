@@ -2,8 +2,6 @@
 
 // Glitch API Link: https://groovy-busy-close.glitch.me/movies
 
-// $(document).ready(function () {
-
     const serverURL = 'https://groovy-busy-close.glitch.me/movies';
 
     $.holdReady( true );
@@ -39,7 +37,6 @@
                                     <p class="card-text">*ENTER DESCRIPTION HERE*</p>
                                     <h5><span>Rating: ${movie.rating}</span></h5>
                                     <br>
-<!--                                    <button class="edit-btn" data-id="${movie.id}">Edit Me!</button>-->
                                     <button class="delete-btn btn btn-secondary my-1" data-id="${movie.id}">Delete Me!</button>
                                  </div>
                              </div>
@@ -81,9 +78,9 @@
     function editMovies() {
 
         data(serverURL).then( function (data) {
-            let formHTML = `<select id="edit-movie-rating" class="custom-select" name="edit-rating" disable selected value>`
+            let formHTML = `<select id="edit-movie-title" class="custom-select" name="edit-rating" disable selected value>`
             data.forEach( function (movie) {
-                formHTML += `<option value="${movie.id}">${movie.title}</option>`
+                formHTML += `<option data-movie-id="${movie.id}">${movie.title}</option>`
             })
             formHTML += `<option hidden disabled selected value> - Select Movie - </option>`
             formHTML += `</select>`
@@ -92,16 +89,13 @@
 
     }
 
-
     $("#edit-movie-btn").click(function (e) {
         e.preventDefault();
             let editAddition = {};
-            var editMovieID = 1;
-            editAddition.id = editMovieID;
-            editAddition.title = $("#edit-movie-title-movie-title").val();
-            editAddition.rating = $("#edit-movie-rating-movie-rating").val();
-
-            fetch(`${serverURL}/${editMovieID}`, {
+            editAddition.id = $("#edit-movie-title").find(":selected").data("movie-id");
+            editAddition.title = $("#edit-movie-title").val()
+            editAddition.rating = $("#edit-movie-rating").val();
+        fetch(`${serverURL}/${editAddition.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -112,7 +106,6 @@
     });
 
     // Delete Movies?
-
 
     function deleteMovie (ID) {
         fetch(`${serverURL}/${ID}`,
@@ -126,30 +119,6 @@
         deleteMovie(selectedBttn);
 
         console.log(selectedBttn)
-        // console.log(this)
         setTimeout(renderData, 2000);
 
-        // setTimeout(renderData, 1500);
-
     });
-
-
-    //-----------------------------------------------
-
-    $(document).on('change', function () {
-        console.log(this.value)
-        console.log($(this));
-    })
-
-
-    // GET all movies?
-    // data(serverURL)
-    //     .then(data => console.log(data));
-
-    // GET single movie?
-    // function getMovie (ID) {
-    //     data(`${serverURL}/${ID}`)
-    //         .then(data => console.log('This specific movie', data));
-    // }
-
-// });
