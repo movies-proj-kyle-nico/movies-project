@@ -51,7 +51,7 @@
 
     renderData();
 
-    // add movie?---------------------------------
+    // Add movies?---------------------------------
 
     function addBttn () {
         let newAddition = {
@@ -74,6 +74,7 @@
         e.preventDefault();
         addBttn();
     });
+
 
     // edit movies?--------------------------------
 
@@ -112,6 +113,39 @@
     var editMovieID = 0;
 
     // Delete a Movie?-----------------------------
+=======
+    // Edit movies?--------------------------------
+
+    function editMovie (ID) {
+        fetch(`${serverURL}/${ID}`,
+            {method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                // body: JSON.stringify({
+                //     title: $(this).title.value,
+                //     rating: $(this).rating.value
+                // })
+            })
+            .then(data => console.log('Edit Movie', data));
+    }
+
+    $(document).on('click', '.edit-btn', function (e) {
+        e.preventDefault();
+        let selectedBttn = $(this).attr('data-id');
+        console.log(selectedBttn);
+        editMovie(selectedBttn);
+    });
+
+    // data.forEach( movie => {
+    //    $("#movie-dropdown").html(`<option data-dropdown="${movie.id}">${movie.title}</option>`)
+    // });
+
+    // $("#edit-movie-title").val($(this).data.title)
+
+    // Delete Movies?
+
+
     function deleteMovie (ID) {
         fetch(`${serverURL}/${ID}`,
             {method: "DELETE"})
@@ -122,9 +156,13 @@
         e.preventDefault();
         let selectedBttn = $(this).attr('data-id');
         deleteMovie(selectedBttn);
+
         console.log(selectedBttn)
         // console.log(this)
         setTimeout(renderData, 2000);
+
+        // setTimeout(renderData, 1500);
+
     });
 
 
