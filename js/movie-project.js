@@ -85,6 +85,7 @@ function editMovies() {
         let formHTML = `<select id="edit-movie-title" class="custom-select" name="edit-rating" disable selected value>`
         data.forEach( function (movie) {
             formHTML += `<option value="${movie.id}">${movie.title}</option>`
+            // formHTML += `<option data-movie-id="${movie.id}">${movie.title}</option>`
         })
         formHTML += `<option hidden disabled selected value> - Select Movie - </option>`
         formHTML += `</select>`
@@ -99,7 +100,9 @@ $("#edit-movie-btn").click(function (e) {
     e.preventDefault();
         let editAddition = {};
         editAddition.id = editMovieID;
-        editAddition.title = $("#edit-movie-title option:selected").text();
+    // editAddition.id = $("#edit-movie-title").find(":selected").data("movie-id");
+        editAddition.title = $("#edit-movie-title option:selected").text()
+    // editAddition.title = $("#edit-movie-title").val();
         editAddition.year = $("#edit-movie-year").val();
         editAddition.rating = $("#edit-movie-rating").val();
         editAddition.image = $("#edit-movie-image").val();
